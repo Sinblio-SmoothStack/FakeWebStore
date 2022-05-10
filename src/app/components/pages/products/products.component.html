@@ -1,0 +1,33 @@
+<div class="container">
+  <label for="product-category-filter">Product Category</label>
+  <select class="form-control"  id="product-category-filter" [(ngModel)]="selected" name = "selectedCategory">
+    <option *ngFor="let category of categories">
+      {{category}}
+    </option>
+  </select>
+  <label for="product-search">Product</label>
+  <input class="form-control" id="product-search" [(ngModel)]="search" name="searchBox" placeholder="Ex. WD 2TB Elements Portable External Hard Drive - USB 3.0">
+  <button (click)="updateProducts()" type="button" class="btn btn-primary" > Search </button>
+</div>
+
+<ul class="list-group" *ngFor="let product of products">
+  <li class="list-group-item">
+    <div class="container-fluid d-flex" style="height: 8rem">
+      <div class="row h-100">
+        <div class = "col-auto h-100">
+          <img src={{product.image}} class="img-fluid h-100" alt="Missing" style="aspect-ratio: 1/1; object-fit: contain">
+        </div>
+        <div class="col h-100">
+          <H6>
+            {{product.title}}
+          </H6>
+          <p>
+            {{product.description}}
+          </p>
+
+        </div>
+      </div>
+    </div>
+    <a href="#" class="stretched-link" (click)="setSelected(product)" routerLink="/product"></a>
+  </li>
+</ul>

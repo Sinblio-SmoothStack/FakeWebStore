@@ -1,0 +1,63 @@
+<div *ngIf="selectedProduct != undefined">
+  <div class="container-fluid">
+    <div class="row">
+      <h1 class = display-4> {{selectedProduct.title}}</h1>
+    </div>
+    <div class="row">
+      <div class = "col-5 flex-column">
+        <img src={{selectedProduct.image}} class="img-fluid w-100" alt="Missing" style="aspect-ratio: 1/1; object-fit: contain">
+      </div>
+      <div class = "col">
+        <p style="font-size: 3rem">{{selectedProduct.price|currency}}</p>
+        <p style="font-size: 1.5rem">{{selectedProduct.description}}</p>
+        <p style="font-size: 1.5rem">Rated:{{selectedProduct.rating.rate}}/5({{selectedProduct.rating.count}})</p>
+      </div>
+    </div>
+  </div>
+</div>
+<p style="font-size: 3rem">Related Products:</p>
+<ul class="list-group" *ngFor="let product of relatedProducts">
+  <li class="list-group-item">
+    <div class="container-fluid d-flex" style="height: 8rem">
+      <div class="row h-100">
+        <div class = "col-auto h-100">
+          <img src={{product.image}} class="img-fluid h-100" alt="Missing" style="aspect-ratio: 1/1; object-fit: contain">
+        </div>
+        <div class="col h-100">
+          <H6>
+            {{product.title}}
+          </H6>
+          <p>
+            {{product.description}}
+          </p>
+
+        </div>
+      </div>
+    </div>
+    <a href="#" class="stretched-link" (click)="setSelected(product)" routerLink="/product"></a>
+  </li>
+</ul>
+
+<div class="row justify-content-center">
+  <p style="font-size: 3rem">Related Products:</p>
+  <span class="border rounded" style="height: 25rem; width: 50rem;">
+        <div id="relatedProductCarousel" class="carousel carousel-dark slide carousel-fade h-100 w-100" data-bs-ride="carousel">
+          <div class="carousel-inner h-100 w-100" *ngFor="let product of relatedProducts">
+            <div *ngIf="product.id == relatedProducts[0].id" class="carousel-item active h-100 w-100">
+              <img src={{product.image}} class="d-block flex-fill h-100 w-100" alt = "image not found" style="aspect-ratio: 2/1; object-fit: contain">
+            </div>
+            <div *ngIf="product.id != relatedProducts[0].id" class="carousel-item h-100 w-100">
+              <img src={{product.image}} class="d-block flex-fill h-100 w-100" alt = "image not found" style="aspect-ratio: 2/1; object-fit: contain">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </span>
+</div>
